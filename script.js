@@ -1,0 +1,40 @@
+const NOME = "rafael andrade";
+let tituloProfissional = "Garoto de Programa / Faço de tudo";
+let minhaBio = "Sou um cara esforçado. Agora sou Baterista" +
+    " Antes eu não era nada";
+let anoFormatura = 2026;
+
+let mesFormatura = 12;
+let diaFormatura = 31;
+let anoIngresso = 2025;
+let mesIngresso = 1;
+let diaIngresso = 1;
+
+const DATAATUAL = new Date(); // Data atual, data completa, biblioteca de data do JavaScript
+let mesAtual = DATAATUAL.getMonth() + 1; // Mês atual (0-11, por isso +1)
+let anoAtual = DATAATUAL.getFullYear(); // Ano atual
+let diaAtual = DATAATUAL.getDate(); // Dia atual
+
+let indefinido;
+let nulo = null;
+
+let curso = {
+    nome: "Sistemas de Informação",
+    semestre: 3,
+    disciplinaAtual: "Design focado no usuário"
+};
+
+console.log(typeof nulo); 
+console.log(typeof indefinido);
+console.log(typeof anoFormatura);
+console.log(typeof minhaBio);
+console.log(typeof tituloProfissional);
+console.log(typeof NOME);    
+console.log(typeof curso);
+
+document.getElementById("meuNome").innerText = NOME;
+document.getElementById("tituloProfissional").innerText = tituloProfissional;
+document.getElementById("minhaBio").innerText = minhaBio;
+document.getElementById("anoFormatura").innerText = "Ano de formatura: " + anoFormatura;
+document.getElementById("tempoRestanteParaFormatura").innerText = `Tempo restante para formatura: ${anoFormatura - anoAtual} anos`;
+document.getElementById("diaFormatura").innerText = "Dia de formatura: " + diaFormatura;
