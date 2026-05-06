@@ -1,6 +1,6 @@
 const NOME = "rafael andrade";
 let tituloProfissional = "Garoto de Programa / Faço de tudo";
-let minhaBio = "Sou um cara esforçado. Agora sou Baterista" +
+let minhaBio = "Sou um cara esforçado" +
     " Antes eu não era nada";
 let anoFormatura = 2026;
 
