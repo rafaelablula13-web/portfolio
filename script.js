@@ -147,4 +147,21 @@ for (let i = 0; i < coisasSobreMim.length; i++) {
     console.log(`Coisa ${i + 1} sobre mim: ${coisasSobreMim[i]}`);
     // Se quiser exibir na página, use:
     document.write(`<p>Coisa ${i + 1} sobre mim: ${coisasSobreMim[i]}</p>`);
-}
+
+    let projetos = [
+    {nome : "aplicaçao de estacionamentos",
+     tecnologias :["pyton","tkinter","fpdf"],
+     conhecimento:"vsCode,github,pip ,pyinstaller, ...",
+     descricão :"aplicação de desktop para gereciamento de um estacionamento
+    },
+    {nome : "aplicaçao de loja de motos",
+     tecnologias :["pyton","tkinter","fpdf"],
+     conhecimento:"vsCode,github,pip ,pyinstaller, ...",
+     descricão :"aplicação de desktop para gereciamento de uma loja de mostos
+    }
+    ]
+
+    document.createElemente("h2").textContent = projetos[0].nome;
+    innerHTML += "<h2>" + projetos[1].nome + "</h2>";
+    conteiner.innerHTML +="<p>" + projetos[0].descrição + "</p>";
+        
