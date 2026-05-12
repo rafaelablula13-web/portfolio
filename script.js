@@ -136,3 +136,15 @@ function exibirPerfil() {
     resultadoQuiz.textContent = "🔄 Perfil Full Stack — você é dos dois!";
   }
 }
+let coisasSobreMim = [
+    "Sou esforçado e dedicado aos meus estudos.",
+    "Adoro aprender coisas novas sobre tecnologia.",
+    "Tenho interesse em desenvolvimento Front-End e Back-End."
+];
+
+// Usando um laço para mostrar cada item
+for (let i = 0; i < coisasSobreMim.length; i++) {
+    console.log(`Coisa ${i + 1} sobre mim: ${coisasSobreMim[i]}`);
+    // Se quiser exibir na página, use:
+    document.write(`<p>Coisa ${i + 1} sobre mim: ${coisasSobreMim[i]}</p>`);
+}
