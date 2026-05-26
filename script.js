@@ -1,74 +1,117 @@
-const NOME = "Rafael Andrade";
-
-let tituloProfissional = "Desenvolvedor Full Stack";
-let minhaBio =
-    "Sou um cara esforçado e dedicado aos estudos. " +
-    "Hoje busco evoluir na programação e construir grandes projetos.";
-
+const NOME = "Rafael andrade batista";
+let tituloProfissional = "Desenvolvedor";
+let minhaBio = "Sou um cara esforçado";
 let anoFormatura = 2026;
+let anoIgresso = 2025;
 let mesFormatura = 12;
 let diaFormatura = 31;
+let mesIgresso = 1;
+let diaIgresso = 15;
+let indefinido;
+let nulo = null;
 
 const DATAATUAL = new Date();
-
-let anoAtual = DATAATUAL.getFullYear();
-let mesAtual = DATAATUAL.getMonth() + 1;
-let diaAtual = DATAATUAL.getDate();
+let mesAtual = DATAATUAL.getMonth() + 1; //pega o mês atual (adiciona 1 pois os meses começam em 0)
+let anoAtual = DATAATUAL.getFullYear(); //pega o ano atual
+let diaAtual = DATAATUAL.getDate(); // pega o dia atual
 
 let curso = {
-    nome: "Sistemas de Informação",
-    semestre: 3,
-    disciplinaAtual: "Design focado no usuário"
+    nome: "Desenvolvimento de Sistemas",
+    duracao: "2 anos",
+    instituicao: "PROZ EDUCAÇÃO"
 };
 
-document.getElementById("meuNome").innerText = NOME;
-document.getElementById("tituloProfissional").innerText = tituloProfissional;
-document.getElementById("minhaBio").innerText = minhaBio;
+const dataInicio = new Date(anoIgresso, mesIgresso - 1, diaIgresso);
+const dataFinal = new Date(anoFormatura, mesFormatura - 1, diaFormatura);
+const tempoTotal = dataFinal - dataInicio;
+const tempoDecorrido = DATAATUAL - dataInicio;
 
-document.getElementById("anoFormatura").innerText =
-    "Ano de formatura: " + anoFormatura;
+let porcentagem = (tempoDecorrido / tempoTotal) * 100;
+porcentagem = Math.min(Math.max(porcentagem, 0), 100).toFixed(2);
 
-document.getElementById("diaFormatura").innerText =
-    `Data prevista: ${diaFormatura}/${mesFormatura}/${anoFormatura}`;
+// Exibindo os tipos de dados no console
+console.log(typeof nulo);
+console.log(typeof indefinido);
+console.log(typeof anoIgresso);
+console.log(typeof anoFormatura);
+console.log(typeof minhaBio);
+console.log(typeof tituloProfissional);
+console.log(typeof NOME);
+console.log(typeof curso);
 
-let anosRestantes = anoFormatura - anoAtual;
+// --- FUNÇÕES DO PROJETO ---
 
-if (anosRestantes <= 0) {
-    document.getElementById("tempoRestanteParaFormatura").innerText =
-        "🎓 Curso concluído!";
-} else if (anosRestantes === 1) {
-    document.getElementById("tempoRestanteParaFormatura").innerText =
-        "⏳ Falta 1 ano para concluir.";
-} else {
-    document.getElementById("tempoRestanteParaFormatura").innerText =
-        `⏳ Faltam ${anosRestantes} anos para concluir.`;
+// 1. Função para carregar e exibir os dados do perfil no HTML
+function carregarDadosDoPerfil() {
+    document.getElementById("meuNome").innerText = NOME;
+    document.getElementById("tituloProfissional").innerText = `Profissão: ${tituloProfissional}`;
+    document.getElementById("minhaBio").innerText = `Biografia: ${minhaBio}`;
+    document.getElementById("curso").innerText = `Curso: ${curso.nome}`;
+    document.getElementById("anoIgresso").innerText = `Ano de Igresso: ${anoIgresso}`;
+    document.getElementById("anoFormatura").innerText = `Ano da Formatura: ${anoFormatura}`;
 }
 
-document.getElementById("cursoInfo").innerHTML = `
-  <p><strong>Curso:</strong> ${curso.nome}</p>
-  <p><strong>Semestre:</strong> ${curso.semestre}</p>
-  <p><strong>Disciplina Atual:</strong> ${curso.disciplinaAtual}</p>
-`;
+// 2. Função para verificar e exibir o status/tempo restante da formatura
+function verificarStatusFormatura() {
+    let anosRestantes = anoFormatura - anoAtual;
+    let mesesRestantes = mesFormatura - mesAtual;
+    let diasRestantes = diaFormatura - diaAtual;
+    let elementoTexto = document.getElementById("tempoRestanteParaFormatura");
 
-let nota = 8;
-let aprovado = nota >= 6 ? "Aprovado" : "Reprovado";
+    if (porcentagem >= 100) {
+        elementoTexto.innerText = "Curso concluído, formado!";
+    } else if (anosRestantes >= 1) {
+        elementoTexto.innerText = `Tempo restante para formatura: ${anosRestantes} anos, ${mesesRestantes} meses e ${diasRestantes} dias. Progresso: ${porcentagem}% concluído.`;
+    } else {
+        elementoTexto.innerText = `Tempo restante para formatura: ${mesesRestantes} meses e ${diasRestantes} dias. Progresso: ${porcentagem}% concluído.`;
+    }
+}
 
-console.log(`Nota: ${nota} - ${aprovado}`);
+// 3. Função para obter o nome do dia da semana (Usa Return e Switch)
+function obterNomeDoDia(numeroDoDia) {
+    switch (numeroDoDia) {
+        case 1: return "Domingo";
+        case 2: return "Segunda-feira";
+        case 3: return "Terça-feira";
+        case 4: return "Quarta-feira";
+        case 5: return "Quinta-feira";
+        case 6: return "Sexta-feira";
+        case 7: return "Sábado";
+        default: return "Dia inválido";
+    }
+}
 
-let diaSemana = DATAATUAL.getDay();
+// 4. Função para renderizar os projetos dinamicamente no container
+function renderizarProjetos() {
+    const container = document.getElementById("projetos");
+    if (!container) return; // Segurança caso o elemento não exista no HTML ainda
+    
+    container.innerHTML = ""; // Limpa o container antes de renderizar
+    for (let i = 0; i < projetos.length; i++) {
+        const projeto = projetos[i];
+        container.innerHTML += `
+            <div class="projeto-card">
+                <h2>${projeto.nome}</h2>
+                <p><strong>Tecnologias:</strong> ${projeto.tecnologias.join(', ')}</p>
+                <p><strong>Ferramentas:</strong> ${projeto.conhecimentos}</p>
+                <p>${projeto.descricao}</p>
+            </div>
+        `;
+    }
+}
 
-let dias = [
-    "Domingo",
-    "Segunda-feira",
-    "Terça-feira",
-    "Quarta-feira",
-    "Quinta-feira",
-    "Sexta-feira",
-    "Sábado"
-];
+// --- LÓGICA DE EXECUÇÃO E EVENTOS ---
 
-console.log("Hoje é:", dias[diaSemana]);
+// Exibindo nota e dia atual usando document.write (e a função obterNomeDoDia)
+let nota = 8; 
+let aprovado = (nota >= 6) ? "Aprovado" : "Reprovado";
+document.write(`<p> Nota: ${nota} - ${aprovado} </p>`);
 
+let diaSemana = DATAATUAL.getDay() + 1; 
+let diaEscrito = obterNomeDoDia(diaSemana);
+document.write(`<p> Hoje é: ${diaEscrito} </p>`);
+
+// Configuração do Quiz de Perfil Dev
 const btnVisual = document.getElementById("btn-visual");
 const btnLogica = document.getElementById("btn-logica");
 const resultadoQuiz = document.getElementById("resultado-quiz");
@@ -76,128 +119,181 @@ const resultadoQuiz = document.getElementById("resultado-quiz");
 let pontosFront = 0;
 let pontosBack = 0;
 
-btnVisual.addEventListener("click", () => {
-    pontosFront++;
-    exibirPerfil();
-});
+if (btnVisual && btnLogica && resultadoQuiz) {
+    btnVisual.addEventListener("click", function() {
+        pontosFront++;
 
-btnLogica.addEventListener("click", () => {
-    pontosBack++;
-    exibirPerfil();
-});
+        
+        resultadoQuiz.innerHTML = `
+            <strong>🎨 Você tem perfil Front-End!</strong><br>
+            Você curte criar interfaces, trabalhar com cores, layouts e a experiência do usuário.
+            Tecnologias pra você: HTML, CSS, React, Vue.
+        `;
+        estilizarResultadoQuiz("#e8f4fd");
+        exibirPerfilGeral();
+    });
 
-function exibirPerfil() {
-    if (pontosFront > pontosBack) {
-        resultadoQuiz.innerHTML =
-            "🎨 <strong>Perfil Front-End!</strong><br>Você gosta de interfaces e design.";
-    } else if (pontosBack > pontosFront) {
-        resultadoQuiz.innerHTML =
-            "⚙️ <strong>Perfil Back-End!</strong><br>Você gosta de lógica e sistemas.";
-    } else {
-        resultadoQuiz.innerHTML =
-            "🚀 <strong>Perfil Full Stack!</strong><br>Você combina criatividade e lógica.";
-    }
+    btnLogica.addEventListener("click", function() {
+        pontosBack++;
+        
+        resultadoQuiz.innerHTML = `
+            <strong>⚙️ Você tem perfil Back-End!</strong><br>
+            Você curte resolver problemas complexos, trabalhar com dados e fazer a mágica acontecer nos bastidores.
+            Tecnologias pra você: Node.js, Python, bancos de dados.
+        `;
+        estilizarResultadoQuiz("#e8f8f0");
+        exibirPerfilGeral();
+    });
 }
 
-let coisasSobreMim = [
-    "Sou esforçado e dedicado aos meus estudos.",
-    "Adoro aprender novas tecnologias.",
-    "Tenho interesse em Front-End e Back-End."
-];
+function estilizarResultadoQuiz(corFundo) {
+    resultadoQuiz.style.backgroundColor = corFundo;
+    resultadoQuiz.style.padding = "12px";
+    resultadoQuiz.style.borderRadius = "8px";
+    resultadoQuiz.style.marginTop = "10px";
+}
 
-const listaCoisas = document.getElementById("listaCoisas");
+function exibirPerfilGeral() {
+    let perfilTexto = "";
+    if (pontosFront > pontosBack) {
+        perfilTexto = "<br><br><strong>Resultado Acumulado:</strong> Perfil predominantemente Front-End! 🎨";
+    } else if (pontosBack > pontosFront) {
+        perfilTexto = "<br><br><strong>Resultado Acumulado:</strong> Perfil predominantemente Back-End! ⚙️";
+    } else {
+        perfilTexto = "<br><br><strong>Resultado Acumulado:</strong> Perfil Full Stack equilibrado! 🔄";
+    }
+    resultadoQuiz.innerHTML += perfilTexto;
+}
 
-coisasSobreMim.forEach((coisa, index) => {
-    listaCoisas.innerHTML += `
-    <p>✔️ ${coisa}</p>
-  `;
-});
-
+// Dados dos Projetos (Array de Objetos)
 let projetos = [
     {
         nome: "Aplicação de Estacionamento",
-        tecnologias: ["Python", "Tkinter", "FPDF"],
-        conhecimento: "VS Code, GitHub, Pip, PyInstaller",
-        descricao:
-            "Aplicação desktop para gerenciamento de estacionamento."
+        tecnologias: ["HTML", "CSS", "JavaScript"],
+        conhecimentos: "VsCode, GitHub, pip, PyInstaller,...",
+        descricao: "Aplicação de Estacionamento é um projeto que simula a gestão de um estacionamento, permitindo aos usuários registrar entradas e saídas de veículos, calcular tarifas e gerar relatórios. O projeto foi desenvolvido utilizando HTML, CSS e JavaScript para criar uma interface amigável e funcional. Além disso, o projeto envolveu o uso de ferramentas como VsCode para desenvolvimento, GitHub para controle de versão, pip para gerenciamento de dependências e PyInstaller para empacotamento da aplicação."
     },
-
     {
-        nome: "Aplicação de Loja de Motos",
-        tecnologias: ["Python", "Tkinter", "FPDF"],
-        conhecimento: "VS Code, GitHub, Pip, PyInstaller",
-        descricao:
-            "Sistema desktop para gerenciamento de loja de motos."
+        nome: "Aplicação de Controle de Estoque",
+        tecnologias: ["Python", "Tkinter", "fpdf"],
+        conhecimentos: "VsCode, GitHub, pip, PyInstaller,...",
+        descricao: "Aplicação de Controle de Estoque é um projeto que permite aos usuários gerenciar o estoque de uma loja ou empresa. A aplicação oferece funcionalidades para adicionar, editar e remover produtos, além de calcular o valor total do estoque e gerar relatórios. O projeto foi desenvolvido utilizando HTML, CSS e JavaScript para criar uma interface intuitiva e responsiva. Ferramentas como VsCode foram utilizadas para o desenvolvimento, GitHub para controle de versão, pip para gerenciamento de dependências e PyInstaller para empacotamento da aplicação."
     }
 ];
 
-const containerProjetos =
-    document.getElementById("containerProjetos");
+const caixa = document.getElementById("caixa");
+  caixa.innerText = "Esse texto foi mudado pelo JS";
 
-projetos.forEach((projeto) => {
-    containerProjetos.innerHTML += `
-    <div class="cardProjeto">
-      <h3>${projeto.nome}</h3>
+const botao = document.getElementById("mudaTexto");
 
-      <p><strong>Tecnologias:</strong>
-      ${projeto.tecnologias.join(", ")}</p>
-
-      <p><strong>Conhecimentos:</strong>
-      ${projeto.conhecimento}</p>
-
-      <p>${projeto.descricao}</p>
-    </div>
-  `;
+botao.addEventListener("click", function() {
+  caixa.innerText = "Você mudou o texto clicando no botão!";
+  caixa.style.backgroundColor = "#f0a";
 });
 
-const caixa = document.getElementById("caixa");
-const botao = document.getElementById("mudaTexto");
 const input = document.getElementById("nome");
+
 const botaoEnviar = document.getElementById("enviar");
 
-// Texto inicial
-caixa.innerText = "Esse texto foi mudado pelo JS";
-
-// Estilo inicial da caixa
-caixa.style.padding = "20px";
-caixa.style.borderRadius = "12px";
-caixa.style.transition = "0.4s";
-caixa.style.textAlign = "center";
-caixa.style.fontFamily = "Arial";
-caixa.style.color = "#fff";
-caixa.style.backgroundColor = "#333";
-caixa.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
-
-// Evento do botão mudar texto
-botao.addEventListener("click", function () {
-    caixa.innerText = "Você mudou o texto clicando no botão!";
-    caixa.style.backgroundColor = "#ff00aa";
-    caixa.style.transform = "scale(1.05)";
-
-    setTimeout(() => {
-        caixa.style.transform = "scale(1)";
-    }, 200);
+botaoEnviar.addEventListener("click", function() {
+  let texto = input.value;
+  console.log(texto);
+  caixa.innerText = `Olá, ${texto}! Bem-vindo ao meu portfólio!`;
+  caixa.style.backgroundColor = "#0af";
+  input.value = "";
 });
 
-// Evento do botão enviar
-botaoEnviar.addEventListener("click", function () {
-    let texto = input.value.trim();
+/// --- FUNÇÕES DA API DE LOCALIDADES (IBGE) ---
 
-    if (texto === "") {
-        caixa.innerText = "Digite seu nome primeiro!";
-        caixa.style.backgroundColor = "#ff4444";
-        return;
+function inicializarAPILocalidades() {
+    const selectEstado = document.getElementById("select-estado");
+    const selectCidade = document.getElementById("select-cidade");
+    const textoRegiao = document.getElementById("texto-regiao"); // Captura o novo elemento
+
+    if (!selectEstado || !selectCidade || !textoRegiao) return;
+
+    // 1. Carrega os estados ao iniciar
+    carregarEstados(selectEstado);
+
+// Função interna para atualizar a frase na tela
+function atualizarFraseSelecionada() {
+    const estadoNome = selectEstado.options[selectEstado.selectedIndex]?.text;
+    const cidadeNome = selectCidade.value;
+
+    if (selectEstado.value && cidadeNome) {
+         textoRegiao.innerText = `Você selecionou: ${cidadeNome} - ${selectEstado.value} (${estadoNome})`;
+    } else if (selectEstado.value) {
+        textoRegiao.innerText = `Estado selecionado: ${estadoNome}. Agora escolha a cidade.`;
+    } else {
+        textoRegiao.innerText = ""; // Limpa se nenhum estado for selecionado
     }
+}
 
-    console.log(texto);
+// 2. Escuta a mudança do Estado
+selectEstado.addEventListener("change", function() {
+    const ufSelecionada = selectEstado.value;
 
-    caixa.innerText = `Olá, ${texto}! Bem-vindo ao meu portfólio! 🚀`;
-    caixa.style.backgroundColor = "#0099ff";
-    caixa.style.transform = "translateY(-5px)";
-
-    setTimeout(() => {
-        caixa.style.transform = "translateY(0)";
-    }, 200);
-
-    input.value = "";
+    if (ufSelecionada) {
+        carregarCidades(ufSelecionada, selectCidade);
+    } else {
+        selectCidade.innerHTML = '<option value="">Selecione um estado primeiro</option>';
+        selectCidade.disabled = true;
+    }
+    atualizarFraseSelecionada(); // Atualiza o texto do estado
 });
+
+// 3. Escuta a mudança da Cidade
+selectCidade.addEventListener("change", function() {
+    atualizarFraseSelecionada(); // Atualiza o texto final com a cidade
+});
+}
+
+// Função que procura todos os Estados na API
+function carregarEstados(elementoSelect) {
+    const url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome";
+
+    fetch(url)
+        .then(resposta => resposta.json())
+        .then(estados => {
+            estados.forEach(estado => {
+                const option = document.createElement("option");
+                option.value = estado.sigla;     // Guarda a sigla (ex: MG, SP) como valor interno
+                option.textContent = estado.nome; // Mostra o nome completo no ecrã
+                elementoSelect.appendChild(option);
+            });
+        })
+        .catch(erro => console.error("Erro ao carregar estados:", erro));
+}
+
+// Função que procura as Cidades do Estado selecionado
+function carregarCidades(siglaUF, elementoSelect) {
+    const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${siglaUF}/municipios`;
+
+    // Mensagem temporária enquanto os dados são descarregados
+    elementoSelect.innerHTML = '<option value="">A carregar cidades...</option>';
+    elementoSelect.disabled = true;
+
+    fetch(url)
+        .then(resposta => resposta.json())
+        .then(cidades => {
+            // Limpa a mensagem de carregamento e define a opção padrão
+            elementoSelect.innerHTML = '<option value="">Selecione uma cidade</option>';
+            
+            cidades.forEach(cidade => {
+                const option = document.createElement("option");
+                option.value = cidade.nome;
+                option.textContent = cidade.nome;
+                elementoSelect.appendChild(option);
+            });
+
+            // Ativa novamente a caixa de seleção para o utilizador escolher
+            elementoSelect.disabled = false;
+        })
+        .catch(erro => console.error("Erro ao carregar cidades:", erro));
+}
+
+// --- INICIALIZAÇÃO AUTOMÁTICA ---
+carregarDadosDoPerfil();
+verificarStatusFormatura();
+renderizarProjetos();
+inicializarAPILocalidades();
