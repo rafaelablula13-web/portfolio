@@ -1,75 +1,97 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/style.css">
-    <title>Portifólio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio rafael</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <main>
-        <h1 id="meuNome"></h1>
-        <h2 id="tituloProfissional"></h2>
-        <p id="minhaBio"></p>
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <h1 id="meuNome"></h1>
+      <p id="tituloProfissional"></p>
+    </div>
+  </header>
+
+  <!-- SOBRE -->
+  <section class="sobre container">
+    <div class="card">
+      <h2>👨‍💻 Sobre Mim</h2>
+      <p id="minhaBio"></p>
+
+      <div class="infos">
         <p id="curso"></p>
         <p id="anoIgresso"></p>
         <p id="anoFormatura"></p>
-
         <p id="tempoRestanteParaFormatura"></p>
+      </div>
+    </div>
+  </section>
 
-        <section id="quiz">
-            <h2>Descubra seu perfil dev</h2>
-            <p>Você prefere trabalhar com...</p>
-    
-            <button id="btn-visual">🎨 Visual e design</button>
-            <button id="btn-logica">⚙️ Lógica e dados</button>
-    
-            <div id="resultado-quiz"></div>
-        </section>
-            <div id="projetos"></div>
+  <!-- QUIZ -->
+  <section class="quiz container">
+    <div class="card">
+      <h2>🎯 Quiz Dev</h2>
 
-        <button id="mudaTexto">Clique aqui para mudar o texto.</button>
-        
-        <p class="paragrafo"> Parágrafo 1 </p>
-        <p class="paragrafo"> Parágrafo 2 </p>
-        <p class="paragrafo"> Parágrafo 3 </p>
+      <div class="quiz-buttons">
+        <button id="btn-visual">🎨 Gosto de Design</button>
+        <button id="btn-logica">⚙️ Gosto de Lógica</button>
+      </div>
 
-        <div id="caixa"> Sou uma caixa </div>
-        <input type="text" id="nome" name="usuario" placeholder="Digite seu nome aqui">
+      <div id="resultado-quiz"></div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section class="container">
+    <h2 class="titulo-secao">🚀 Projetos</h2>
+
+    <div id="projetos" class="projetos-grid"></div>
+  </section>
+
+  <!-- INTERAÇÃO -->
+  <section class="container">
+    <div class="card">
+      <h2>💬 Interação</h2>
+
+      <div id="caixa">
+        Esse texto será alterado
+      </div>
+
+      <button id="mudaTexto">Mudar Texto</button>
+
+      <div class="input-area">
+        <input type="text" id="nome" placeholder="Digite seu nome">
         <button id="enviar">Enviar</button>
+      </div>
+    </div>
+  </section>
 
-        <ul>
-        <li>Item A</li>
-        <li>Item B</li>
-        <li>Item C</li>
-        </ul>
+  <!-- API IBGE -->
+  <section class="container">
+    <div class="card">
+      <h2>🌎 Localidades do Brasil</h2>
 
-        <section id="localidades">
-            <h2>Pesquisa de Municípios</h2>
-            <p>Selecione um estado para ver as suas cidades:</p>
-    
-            <div class="campo-selecao">
-                <label for="select-estado">Estado:</label>
-                <select id="select-estado">
-                    <option value="">Selecione um estado</option>
-            </select>
-            </div>
+      <select id="select-estado">
+        <option value="">Selecione um estado</option>
+      </select>
 
-            <div class="campo-selecao">
-                <label for="select-cidade">Cidade:</label>
-                <select id="select-cidade" disabled>
-                    <option value="">Selecione um estado primeiro</option>
-                </select>
-            </div>
+      <select id="select-cidade" disabled>
+        <option value="">Selecione um estado primeiro</option>
+      </select>
 
-            <div id="resultado-localidade" style="margin-top: 15px; font-weight: bold;">
-                <p id="texto-regiao"></p>
-            </div>
-        </section>
-    </main>
+      <p id="texto-regiao"></p>
+    </div>
+  </section>
 
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 - Rafael andrade batista</p>
+  </footer>
 
-    <script src="../scripts/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
